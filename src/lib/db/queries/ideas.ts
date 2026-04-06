@@ -33,7 +33,11 @@ export async function getActiveAndDraftIdeas(): Promise<Idea[]> {
 
 export async function updateDraft(
   id: string,
-  fields: { finalPrompt?: string; finalInstructions?: string }
+  fields: {
+    finalPrompt?: string
+    finalInstructions?: string
+    finalPageData?: Record<string, unknown>
+  }
 ): Promise<void> {
   const db = drizzle(getDb())
   await db

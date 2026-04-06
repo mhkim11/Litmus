@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic'
 const RequestSchema = z.object({
   finalPrompt: z.string().optional(),
   finalInstructions: z.string().optional(),
+  finalPageData: z.record(z.string(), z.unknown()).optional(),
 })
 
 export async function PATCH(
