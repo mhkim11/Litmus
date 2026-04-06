@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { sql } from '@/lib/db/client'
 
+export const dynamic = 'force-dynamic'
+
 /**
  * Temporary DB connectivity check endpoint.
  *
