@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-04-06
-last_updated: 2026-04-06T20:00:00Z
+last_updated: 2026-04-07T00:00:00Z
 project: blog-practice
 project_key: NOKEY
 tracking_system: file-system
@@ -46,7 +46,7 @@ development_status:
   epic-1: done
   1-1-nextjs-bun-project-setup: done
   1-2-vercel-neon-deployment-pipeline: done
-  1-3-drizzle-schema-migration: review
+  1-3-drizzle-schema-migration: done
   1-4-slug-immutable-trigger: done
   1-5-operator-token-middleware-auth: done
   1-6-llm-base-function-zod-schema: done
@@ -71,34 +71,34 @@ development_status:
 
   # Epic 3: Publishing & Data Pipeline
   epic-3: done
-  3-1-preview-visitor-view: review
-  3-2-publish-api-slug-published-at: review
-  3-3-published-page-components: review
-  3-4-legal-disclaimer-footer-ci-grep: review
-  3-5-event-collector-api-edge: review
-  3-6-client-tracking-utility: review
-  3-7-pv-cta-event-wiring: review
-  3-8-email-form-validation-invalid-counter: review
-  3-9-og-meta-responsive-noindex-republish: review
-  3-10-lighthouse-ci-bundle-size: review
+  3-1-preview-visitor-view: done
+  3-2-publish-api-slug-published-at: done
+  3-3-published-page-components: done
+  3-4-legal-disclaimer-footer-ci-grep: done
+  3-5-event-collector-api-edge: done
+  3-6-client-tracking-utility: done
+  3-7-pv-cta-event-wiring: done
+  3-8-email-form-validation-invalid-counter: done
+  3-9-og-meta-responsive-noindex-republish: done
+  3-10-lighthouse-ci-bundle-size: done
   epic-3-retrospective: optional
 
   # Epic 4: Dashboard & Decision Making
   epic-4: done
-  4-1-metrics-aggregation-dashboard-extension: review
-  4-2-metric-sorting: review
-  4-3-time-based-status-messages: review
-  4-4-min-sample-conversion-suppression: review
-  4-5-email-list-view: review
-  4-6-llm-cost-monitoring-ui: review
-  4-7-empty-state-enhancement: review
+  4-1-metrics-aggregation-dashboard-extension: done
+  4-2-metric-sorting: done
+  4-3-time-based-status-messages: done
+  4-4-min-sample-conversion-suppression: done
+  4-5-email-list-view: done
+  4-6-llm-cost-monitoring-ui: done
+  4-7-empty-state-enhancement: done
   epic-4-retrospective: optional
 
   # Epic 5: Lifecycle Management
   epic-5: done
-  5-1-archive-api-confirm-dialog: review
-  5-2-archived-section-integration: review
-  5-3-archive-restore: review
-  5-4-permanent-delete-archived-only: review
-  5-5-json-export-operator-ui: review
+  5-1-archive-api-confirm-dialog: done
+  5-2-archived-section-integration: done
+  5-3-archive-restore: done
+  5-4-permanent-delete-archived-only: done
+  5-5-json-export-operator-ui: done
   epic-5-retrospective: optional
