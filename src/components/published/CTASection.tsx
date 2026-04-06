@@ -34,7 +34,7 @@ export default function CTASection({ buttonText, comingSoonMessage, ideaId, onCt
           >
             {buttonText}
           </button>
-          <p className="text-gray-500 text-sm">{comingSoonMessage}</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">{comingSoonMessage}</p>
         </>
       ) : (
         <EmailForm ideaId={ideaId!} />

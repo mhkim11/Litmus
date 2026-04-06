@@ -45,7 +45,7 @@ export default async function PublishedPage({ params }: Props) {
   const pageData = idea.finalPageData as LandingPageData
 
   return (
-    <main className="min-h-screen bg-white flex flex-col">
+    <main className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
       <TrackingBoundary ideaId={idea.id} />
       <HeroSection title={pageData.hero.title} subtitle={pageData.hero.subtitle} />
       <ValueProps items={pageData.valueProps} />

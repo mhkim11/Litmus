@@ -32,7 +32,7 @@ export default function EmailForm({ ideaId }: EmailFormProps) {
 
   if (formState === 'success') {
     return (
-      <p className="text-green-700 font-medium text-center py-4">
+      <p className="text-green-700 dark:text-green-400 font-medium text-center py-4">
         소식을 기다리겠습니다 🙌
       </p>
     )
@@ -40,12 +40,12 @@ export default function EmailForm({ ideaId }: EmailFormProps) {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-sm mx-auto">
-      <p className="text-sm text-gray-600 text-center">
+      <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
         아직 출시 전이에요. 출시되면 가장 먼저 알려드릴게요
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <label htmlFor="email-input" className="text-sm font-medium text-gray-700">
+          <label htmlFor="email-input" className="text-sm font-medium text-gray-700 dark:text-gray-200">
             이메일
           </label>
           <input
@@ -54,7 +54,7 @@ export default function EmailForm({ ideaId }: EmailFormProps) {
             value={email}
             onChange={(e) => { setEmail(e.target.value); setFormState('idle') }}
             placeholder="your@email.com"
-            className="border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 min-h-[44px]"
+            className="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400 min-h-[44px]"
           />
           {formState === 'error' && (
             <p className="text-sm text-red-600">이메일 형식이 올바르지 않습니다</p>
@@ -67,7 +67,7 @@ export default function EmailForm({ ideaId }: EmailFormProps) {
           신청하기
         </button>
       </form>
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
         제출하신 이메일은 출시 알림 목적으로만 사용됩니다.
       </p>
     </div>

@@ -35,7 +35,7 @@ export default function PromptEditor({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <label htmlFor="prompt" className="text-sm font-medium text-gray-700">
+        <label htmlFor="prompt" className="text-sm font-medium text-gray-700 dark:text-gray-200">
           프롬프트 <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -45,13 +45,13 @@ export default function PromptEditor({
           onChange={(e) => setPrompt(e.target.value)}
           onBlur={saveNow}
           placeholder="예: 퇴근 후 15분 코딩 챌린지 앱"
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="instructions" className="text-sm font-medium text-gray-700">
-          지시문 <span className="text-gray-400 font-normal">(선택)</span>
+        <label htmlFor="instructions" className="text-sm font-medium text-gray-700 dark:text-gray-200">
+          지시문 <span className="text-gray-400 dark:text-gray-500 font-normal">(선택)</span>
         </label>
         <textarea
           id="instructions"
@@ -60,7 +60,7 @@ export default function PromptEditor({
           onChange={(e) => setInstructions(e.target.value)}
           onBlur={saveNow}
           placeholder="예: 타겟은 직장인 개발자. 톤은 친근하게."
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
@@ -74,7 +74,7 @@ export default function PromptEditor({
         </button>
 
         {statusLabel && (
-          <span className={`text-xs ${status === 'error' ? 'text-red-600' : 'text-gray-400'}`}>
+          <span className={`text-xs ${status === 'error' ? 'text-red-600' : 'text-gray-400 dark:text-gray-500'}`}>
             {statusLabel}
           </span>
         )}

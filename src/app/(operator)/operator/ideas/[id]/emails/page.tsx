@@ -35,13 +35,13 @@ export default async function EmailsPage({ params }: Props) {
         <Link href="/operator" className="text-sm text-blue-600 hover:underline">
           ← Operator Console
         </Link>
-        <span className="text-gray-400">/</span>
+        <span className="text-gray-400 dark:text-gray-500">/</span>
         <Link href={`/operator/ideas/${id}`} className="text-sm text-blue-600 hover:underline truncate max-w-xs">
           {title}
         </Link>
       </div>
       <h1 className="text-2xl font-bold mb-2">이메일 목록</h1>
-      <p className="text-sm text-gray-500 mb-6">수집된 이메일: {emails.length}개</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">수집된 이메일: {emails.length}개</p>
       <EmailList emails={emails} ideaId={id} />
     </main>
   )

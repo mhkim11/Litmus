@@ -17,12 +17,12 @@ export default function GenerationProgress({ onCancel }: GenerationProgressProps
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-3">
-        <span className="text-sm text-gray-600 animate-pulse">
+        <span className="text-sm text-gray-600 dark:text-gray-300 animate-pulse">
           아이디어를 만들고 있어요... ({elapsed}초 경과)
         </span>
         <button
           onClick={onCancel}
-          className="text-sm text-gray-400 hover:text-gray-600 underline"
+          className="text-sm text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 underline"
         >
           취소
         </button>

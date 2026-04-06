@@ -9,9 +9,9 @@ interface ArchiveConfirmDialogProps {
 export default function ArchiveConfirmDialog({ onConfirm, onCancel, isPending }: ArchiveConfirmDialogProps) {
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6 flex flex-col gap-4">
-        <h2 className="text-lg font-semibold text-gray-900">💤 이 아이디어를 정리할까요?</h2>
-        <ul className="text-sm text-gray-600 space-y-1 list-none">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-sm w-full p-6 flex flex-col gap-4">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">💤 이 아이디어를 정리할까요?</h2>
+        <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1 list-none">
           <li>• 페이지는 유지되지만 대시보드 상단에서 사라집니다</li>
           <li>• 지금까지 수집한 데이터는 그대로 보존됩니다</li>
           <li>• 언제든 Archive 섹션에서 다시 꺼낼 수 있어요</li>
@@ -20,14 +20,14 @@ export default function ArchiveConfirmDialog({ onConfirm, onCancel, isPending }:
           <button
             onClick={onCancel}
             disabled={isPending}
-            className="px-4 py-2 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+            className="px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
             취소
           </button>
           <button
             onClick={onConfirm}
             disabled={isPending}
-            className="px-4 py-2 text-sm bg-gray-800 text-white rounded-md hover:bg-gray-900 transition-colors disabled:opacity-50"
+            className="px-4 py-2 text-sm bg-gray-800 dark:bg-gray-600 text-white rounded-md hover:bg-gray-900 dark:hover:bg-gray-500 transition-colors disabled:opacity-50"
           >
             {isPending ? '처리 중...' : '정리하기'}
           </button>

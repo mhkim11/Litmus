@@ -45,10 +45,10 @@ export default async function OperatorPage({ searchParams }: Props) {
       {/* LLM 비용 배지 */}
       <div className={`inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full mb-6 ${
         costPct >= 100
-          ? 'bg-red-100 text-red-700'
+          ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400'
           : costPct >= 80
-          ? 'bg-amber-100 text-amber-700'
-          : 'bg-gray-100 text-gray-600'
+          ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400'
+          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
       }`}>
         💰 이번 달 LLM 비용: ${llmCost.toFixed(2)} / ${maxBudget.toFixed(2)} ({costPct.toFixed(0)}%)
         {costPct >= 100 && <span className="font-semibold">— Kill Switch 활성</span>}

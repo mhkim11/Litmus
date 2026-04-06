@@ -11,11 +11,11 @@ export default function ExportPage() {
         </Link>
       </div>
       <h1 className="text-2xl font-bold mb-4">데이터 내보내기</h1>
-      <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 mb-6">
-        <p className="text-sm text-gray-600 leading-relaxed">
+      <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
           이 파일은 모든 아이디어, 이벤트, 이메일, LLM 호출 기록을 포함합니다. 안전한 곳에 보관하세요.
         </p>
-        <ul className="mt-3 text-xs text-gray-500 space-y-1">
+        <ul className="mt-3 text-xs text-gray-500 dark:text-gray-400 space-y-1">
           <li>• ideas — 모든 아이디어와 생성된 페이지 데이터</li>
           <li>• events — 방문자 이벤트 (PV, CTA, 이메일 제출)</li>
           <li>• email_collections — 수집된 이메일 주소</li>

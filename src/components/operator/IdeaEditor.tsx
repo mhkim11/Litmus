@@ -126,8 +126,8 @@ export default function IdeaEditor({
 
       {/* 에러 */}
       {mutation.isError && !isCancelled && (
-        <div className="rounded-md border border-red-200 bg-red-50 p-4 flex items-center justify-between">
-          <p className="text-sm text-red-700">
+        <div className="rounded-md border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950 p-4 flex items-center justify-between">
+          <p className="text-sm text-red-700 dark:text-red-400">
             {mutation.error instanceof BudgetExceededError
               ? '이번 달 LLM 예산을 초과했습니다. MAX_MONTHLY_USD를 조정하거나 다음 달까지 기다려주세요.'
               : '생성에 실패했습니다. 다시 시도해주세요.'}
@@ -135,7 +135,7 @@ export default function IdeaEditor({
           {!(mutation.error instanceof BudgetExceededError) && (
             <button
               onClick={() => mutation.reset()}
-              className="text-sm text-red-600 underline ml-4 shrink-0"
+              className="text-sm text-red-600 dark:text-red-400 underline ml-4 shrink-0"
             >
               다시 생성
             </button>
@@ -150,13 +150,13 @@ export default function IdeaEditor({
           <div className="flex gap-2 flex-wrap items-center">
             <button
               onClick={() => mutation.mutate({ prompt: lastPrompt, instructions: lastInstructions || undefined })}
-              className="px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               재생성
             </button>
             <button
               onClick={() => { setViewMode('prompting'); setIsInlineEditing(false) }}
-              className="px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               프롬프트 수정
             </button>
@@ -164,8 +164,8 @@ export default function IdeaEditor({
               onClick={() => setIsInlineEditing((v) => !v)}
               className={`px-3 py-1.5 text-sm border rounded-md transition-colors ${
                 isInlineEditing
-                  ? 'border-blue-400 bg-blue-50 text-blue-700'
-                  : 'border-gray-300 hover:bg-gray-50'
+                  ? 'border-blue-400 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-400'
+                  : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
               }`}
             >
               {isInlineEditing ? '편집 완료' : '직접 편집'}
@@ -174,7 +174,7 @@ export default function IdeaEditor({
               href={`/operator/ideas/${ideaId}/preview`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 text-sm border border-blue-300 text-blue-700 rounded-md hover:bg-blue-50 transition-colors"
+              className="px-3 py-1.5 text-sm border border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-400 rounded-md hover:bg-blue-50 dark:hover:bg-blue-950 transition-colors"
             >
               미리보기 ↗
             </a>
@@ -182,14 +182,14 @@ export default function IdeaEditor({
               href={`/operator/ideas/${ideaId}/quick-preview`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               Quick Preview ↗
             </a>
             <button
               onClick={() => publishMutation.mutate()}
               disabled={publishMutation.isPending}
-              className="px-3 py-1.5 text-sm border border-green-400 text-green-700 rounded-md hover:bg-green-50 transition-colors disabled:opacity-50"
+              className="px-3 py-1.5 text-sm border border-green-400 dark:border-green-700 text-green-700 dark:text-green-400 rounded-md hover:bg-green-50 dark:hover:bg-green-950 transition-colors disabled:opacity-50"
             >
               {publishMutation.isPending ? '발행 중...' : publishedSlug ? '재발행' : '발행'}
             </button>
@@ -204,7 +204,7 @@ export default function IdeaEditor({
 
           {/* 발행 에러 */}
           {publishMutation.isError && (
-            <p className="text-sm text-red-600">
+            <p className="text-sm text-red-600 dark:text-red-400">
               {publishMutation.error instanceof Error
                 ? publishMutation.error.message
                 : '발행에 실패했습니다.'}
@@ -213,13 +213,13 @@ export default function IdeaEditor({
 
           {/* 발행된 URL */}
           {publishedSlug && (
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-500 dark:text-gray-400">
               발행 URL:{' '}
               <a
                 href={`/${publishedSlug}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className="text-blue-600 dark:text-blue-400 hover:underline"
               >
                 /{publishedSlug}
               </a>
@@ -234,30 +234,30 @@ export default function IdeaEditor({
               onChange={setLocalPageData}
             />
           ) : (
-            <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 flex flex-col gap-4">
-              <h2 className="text-lg font-semibold text-gray-800">생성 결과</h2>
+            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 bg-gray-50 dark:bg-gray-800 flex flex-col gap-4">
+              <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">생성 결과</h2>
               <section>
-                <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Hero</p>
-                <p className="font-bold text-gray-900">{localPageData.hero.title}</p>
-                <p className="text-gray-600 text-sm mt-1">{localPageData.hero.subtitle}</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">Hero</p>
+                <p className="font-bold text-gray-900 dark:text-white">{localPageData.hero.title}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">{localPageData.hero.subtitle}</p>
               </section>
               <section>
-                <p className="text-xs text-gray-400 uppercase tracking-wide mb-2">가치제안</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-2">가치제안</p>
                 <ul className="flex flex-col gap-2">
                   {localPageData.valueProps.map((vp, i) => (
                     <li key={i} className="text-sm">
-                      <span className="font-medium text-gray-800">{vp.title}</span>
-                      <span className="text-gray-500"> — {vp.description}</span>
+                      <span className="font-medium text-gray-800 dark:text-gray-100">{vp.title}</span>
+                      <span className="text-gray-500 dark:text-gray-400"> — {vp.description}</span>
                     </li>
                   ))}
                 </ul>
               </section>
               <section>
-                <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">CTA</p>
-                <p className="text-sm text-gray-700">
+                <p className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">CTA</p>
+                <p className="text-sm text-gray-700 dark:text-gray-200">
                   버튼: <span className="font-medium">{localPageData.cta.buttonText}</span>
                 </p>
-                <p className="text-sm text-gray-500 mt-1">{localPageData.cta.comingSoonMessage}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{localPageData.cta.comingSoonMessage}</p>
               </section>
             </div>
           )}

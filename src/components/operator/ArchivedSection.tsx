@@ -39,28 +39,28 @@ export default function ArchivedSection({ ideas }: ArchivedSectionProps) {
       <div className="mt-8">
         <button
           onClick={() => setIsOpen((v) => !v)}
-          className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 mb-3"
+          className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 mb-3"
         >
           <span>{isOpen ? '▼' : '▶'}</span>
           <span className="font-medium">Archived</span>
-          <span className="text-gray-400">· {ideas.length}개의 아이디어가 잘 쉬고 있어요</span>
+          <span className="text-gray-400 dark:text-gray-500">· {ideas.length}개의 아이디어가 잘 쉬고 있어요</span>
         </button>
 
         {isOpen && ideas.length > 0 && (
-          <div className="overflow-x-auto rounded-lg border border-gray-200 opacity-75">
+          <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700 opacity-75">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <tr>
-                  <th className="text-left px-4 py-3 font-medium text-gray-500">프롬프트</th>
-                  <th className="text-center px-4 py-3 font-medium text-gray-500 w-16">PV</th>
-                  <th className="text-center px-4 py-3 font-medium text-gray-500 w-16">이메일</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-500 w-24">발행 URL</th>
+                  <th className="text-left px-4 py-3 font-medium text-gray-500 dark:text-gray-400">프롬프트</th>
+                  <th className="text-center px-4 py-3 font-medium text-gray-500 dark:text-gray-400 w-16">PV</th>
+                  <th className="text-center px-4 py-3 font-medium text-gray-500 dark:text-gray-400 w-16">이메일</th>
+                  <th className="text-left px-4 py-3 font-medium text-gray-500 dark:text-gray-400 w-24">발행 URL</th>
                   <th className="px-4 py-3 w-32" />
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                 {ideas.map((idea) => (
-                  <tr key={idea.id} className="hover:bg-gray-50 transition-colors text-gray-500">
+                  <tr key={idea.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-gray-500 dark:text-gray-400">
                     <td
                       className="px-4 py-3 cursor-pointer"
                       onClick={() => { window.location.href = `/operator/ideas/${idea.id}` }}
@@ -73,7 +73,7 @@ export default function ArchivedSection({ ideas }: ArchivedSectionProps) {
                     <td className="px-4 py-3 text-center">{idea.emails || '—'}</td>
                     <td className="px-4 py-3 text-xs">
                       {idea.slug ? (
-                        <a href={`/${idea.slug}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                        <a href={`/${idea.slug}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 dark:text-blue-400 hover:underline">
                           /{idea.slug} ↗
                         </a>
                       ) : '—'}
@@ -82,13 +82,13 @@ export default function ArchivedSection({ ideas }: ArchivedSectionProps) {
                       <button
                         onClick={() => restoreMutation.mutate(idea.id)}
                         disabled={restoreMutation.isPending}
-                        className="text-xs text-blue-500 hover:text-blue-700 disabled:opacity-50"
+                        className="text-xs text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 disabled:opacity-50"
                       >
                         복원
                       </button>
                       <button
                         onClick={() => setDeleteTarget(idea.id)}
-                        className="text-xs text-red-400 hover:text-red-600"
+                        className="text-xs text-red-400 dark:text-red-500 hover:text-red-600 dark:hover:text-red-400"
                       >
                         삭제
                       </button>
@@ -101,7 +101,7 @@ export default function ArchivedSection({ ideas }: ArchivedSectionProps) {
         )}
 
         {isOpen && ideas.length === 0 && (
-          <p className="text-sm text-gray-400 pl-4">정리된 아이디어가 없습니다.</p>
+          <p className="text-sm text-gray-400 dark:text-gray-500 pl-4">정리된 아이디어가 없습니다.</p>
         )}
       </div>
 
