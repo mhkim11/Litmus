@@ -53,7 +53,7 @@ development_status:
   1-7-kill-switch-logging: done
   1-8-claude-md-env-readme-gitignore: done
   1-9-ci-check-legal-sentry: done
-  1-10-debug-json-export-api: ready-for-dev
+  1-10-debug-json-export-api: done
   epic-1-retrospective: optional
 
   # Epic 2: Idea Creation & Workspace
