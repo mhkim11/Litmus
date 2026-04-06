@@ -69,3 +69,38 @@ export async function getIdeaById(id: string): Promise<Idea | null> {
   const [row] = await db.select().from(ideas).where(eq(ideas.id, id))
   return row ?? null
 }
+
+export async function publishIdea(
+  id: string,
+  slug: string
+): Promise<{ id: string; slug: string; publishedAt: string }> {
+  const db = drizzle(getDb())
+  // First-time publish: set slug + active + published_at atomically
+  const [row] = await db
+    .update(ideas)
+    .set({ slug, status: 'active', publishedAt: new Date(), updatedAt: new Date() })
+    .where(eq(ideas.id, id))
+    .returning({ id: ideas.id, slug: ideas.slug, publishedAt: ideas.publishedAt })
+  return {
+    id: row.id,
+    slug: row.slug!,
+    publishedAt: row.publishedAt!.toISOString(),
+  }
+}
+
+export async function republishIdea(
+  id: string
+): Promise<{ id: string; slug: string; publishedAt: string }> {
+  const db = drizzle(getDb())
+  // Re-publish: only set status='active', slug and published_at are immutable
+  const [row] = await db
+    .update(ideas)
+    .set({ status: 'active', updatedAt: new Date() })
+    .where(eq(ideas.id, id))
+    .returning({ id: ideas.id, slug: ideas.slug, publishedAt: ideas.publishedAt })
+  return {
+    id: row.id,
+    slug: row.slug!,
+    publishedAt: row.publishedAt!.toISOString(),
+  }
+}

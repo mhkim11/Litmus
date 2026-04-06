@@ -30,6 +30,8 @@ export default async function IdeaEditPage({ params }: Props) {
         initialPrompt={idea.finalPrompt ?? ''}
         initialInstructions={idea.finalInstructions ?? ''}
         initialPageData={(idea.finalPageData as LandingPageData) ?? null}
+        initialStatus={idea.status}
+        initialSlug={idea.slug}
       />
     </main>
   )

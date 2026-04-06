@@ -12,6 +12,8 @@ interface IdeaEditorProps {
   initialPrompt?: string
   initialInstructions?: string
   initialPageData?: LandingPageData | null
+  initialStatus?: 'draft' | 'active' | 'archived'
+  initialSlug?: string | null
 }
 
 class BudgetExceededError extends Error {
@@ -45,6 +47,7 @@ export default function IdeaEditor({
   initialPrompt = '',
   initialInstructions = '',
   initialPageData,
+  initialSlug,
 }: IdeaEditorProps) {
   const [viewMode, setViewMode] = useState<ViewMode>(initialPageData ? 'result' : 'prompting')
   const [isInlineEditing, setIsInlineEditing] = useState(false)
@@ -53,6 +56,8 @@ export default function IdeaEditor({
   )
   const [lastPrompt, setLastPrompt] = useState(initialPrompt)
   const [lastInstructions, setLastInstructions] = useState(initialInstructions)
+  const [publishedSlug, setPublishedSlug] = useState<string | null>(initialSlug ?? null)
+  const [toast, setToast] = useState<string | null>(null)
   const abortRef = useRef<AbortController | null>(null)
 
   const mutation = useMutation({
@@ -67,6 +72,27 @@ export default function IdeaEditor({
     },
     onSettled: () => {
       abortRef.current = null
+    },
+  })
+
+  const publishMutation = useMutation({
+    mutationFn: () =>
+      fetch(`/api/ideas/${ideaId}/publish`, { method: 'POST' }).then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}))
+          throw new Error(body.error ?? '발행에 실패했습니다.')
+        }
+        return res.json() as Promise<{ id: string; slug: string; publishedUrl: string; publishedAt: string }>
+      }),
+    onSuccess: async (data) => {
+      setPublishedSlug(data.slug)
+      try {
+        await navigator.clipboard.writeText(data.publishedUrl)
+      } catch {
+        // clipboard 권한 없는 경우 무시
+      }
+      setToast('URL이 클립보드에 복사되었습니다')
+      setTimeout(() => setToast(null), 3000)
     },
   })
 
@@ -160,7 +186,45 @@ export default function IdeaEditor({
             >
               Quick Preview ↗
             </a>
+            <button
+              onClick={() => publishMutation.mutate()}
+              disabled={publishMutation.isPending}
+              className="px-3 py-1.5 text-sm border border-green-400 text-green-700 rounded-md hover:bg-green-50 transition-colors disabled:opacity-50"
+            >
+              {publishMutation.isPending ? '발행 중...' : publishedSlug ? '재발행' : '발행'}
+            </button>
           </div>
+
+          {/* 토스트 */}
+          {toast && (
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-sm px-4 py-2 rounded-lg shadow-lg z-50">
+              {toast}
+            </div>
+          )}
+
+          {/* 발행 에러 */}
+          {publishMutation.isError && (
+            <p className="text-sm text-red-600">
+              {publishMutation.error instanceof Error
+                ? publishMutation.error.message
+                : '발행에 실패했습니다.'}
+            </p>
+          )}
+
+          {/* 발행된 URL */}
+          {publishedSlug && (
+            <p className="text-xs text-gray-500">
+              발행 URL:{' '}
+              <a
+                href={`/${publishedSlug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                /{publishedSlug}
+              </a>
+            </p>
+          )}
 
           {/* 인라인 편집 또는 결과 표시 */}
           {isInlineEditing ? (
