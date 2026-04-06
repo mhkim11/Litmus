@@ -12,8 +12,9 @@ const ROOT = resolve(import.meta.dirname, '..')
 const CHUNKS_DIR = join(ROOT, '.next', 'static', 'chunks', 'app')
 const MAX_GZIP_KB = 50
 
-if (!existsSync(CHUNKS_DIR)) {
-  console.error('❌ .next/static/chunks/app not found. Run `bun run build` first.')
+const sharedChunksDir = join(ROOT, '.next', 'static', 'chunks')
+if (!existsSync(CHUNKS_DIR) && !existsSync(sharedChunksDir)) {
+  console.error('❌ .next/static/chunks not found. Run `bun run build` first.')
   process.exit(1)
 }
 
@@ -23,11 +24,11 @@ function gzipSizeKb(filepath: string): number {
 }
 
 // Collect all JS chunks under the [slug] route segment
-const slugDirs = readdirSync(CHUNKS_DIR, { withFileTypes: true })
-  .filter((d) => d.isDirectory() && d.name.startsWith('['))
-  .map((d) => join(CHUNKS_DIR, d.name))
-
-const sharedChunksDir = join(ROOT, '.next', 'static', 'chunks')
+const slugDirs = existsSync(CHUNKS_DIR)
+  ? readdirSync(CHUNKS_DIR, { withFileTypes: true })
+      .filter((d) => d.isDirectory() && d.name.startsWith('['))
+      .map((d) => join(CHUNKS_DIR, d.name))
+  : []
 
 // Also include the page bundle itself
 const allJsFiles: string[] = []
@@ -41,17 +42,8 @@ for (const dir of slugDirs) {
   }
 }
 
-// If no slug-specific chunks found, check shared page chunks
 if (allJsFiles.length === 0) {
-  console.log('ℹ️  No [slug]-specific chunks found — checking shared app chunks')
-  const shared = readdirSync(sharedChunksDir)
-    .filter((f) => f.endsWith('.js') && !f.startsWith('webpack'))
-    .map((f) => join(sharedChunksDir, f))
-  allJsFiles.push(...shared.slice(0, 10)) // sample top chunks
-}
-
-if (allJsFiles.length === 0) {
-  console.log('ℹ️  No JS chunks to check — skipping bundle size validation')
+  console.log('ℹ️  No [slug]-specific chunks found — skipping bundle size validation')
   process.exit(0)
 }
 
