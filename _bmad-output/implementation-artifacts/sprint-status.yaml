@@ -77,7 +77,7 @@ development_status:
   3-4-legal-disclaimer-footer-ci-grep: review
   3-5-event-collector-api-edge: review
   3-6-client-tracking-utility: review
-  3-7-pv-cta-event-wiring: backlog
+  3-7-pv-cta-event-wiring: review
   3-8-email-form-validation-invalid-counter: backlog
   3-9-og-meta-responsive-noindex-republish: backlog
   3-10-lighthouse-ci-bundle-size: backlog
