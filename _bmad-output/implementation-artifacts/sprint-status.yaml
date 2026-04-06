@@ -43,7 +43,7 @@ story_location: _bmad-output/implementation-artifacts
 
 development_status:
   # Epic 1: Foundation — 프로젝트 세팅 & 가드레일
-  epic-1: in-progress
+  epic-1: done
   1-1-nextjs-bun-project-setup: done
   1-2-vercel-neon-deployment-pipeline: done
   1-3-drizzle-schema-migration: review
