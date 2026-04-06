@@ -53,10 +53,16 @@ const landingPageTool: Anthropic.Tool = {
   },
 }
 
+export interface GenerateResult {
+  pageData: LandingPageData
+  promptTokens: number
+  completionTokens: number
+}
+
 export async function generateLanding(
   prompt: string,
   instructions?: string
-): Promise<LandingPageData> {
+): Promise<GenerateResult> {
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
   const userMessage = instructions
@@ -77,5 +83,9 @@ export async function generateLanding(
     throw new Error('LLM did not use the expected tool')
   }
 
-  return LandingPageData.parse(toolUse.input)
+  return {
+    pageData: LandingPageData.parse(toolUse.input),
+    promptTokens: response.usage.input_tokens,
+    completionTokens: response.usage.output_tokens,
+  }
 }

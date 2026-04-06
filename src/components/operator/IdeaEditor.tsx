@@ -11,6 +11,10 @@ interface IdeaEditorProps {
   initialPageData?: LandingPageData | null
 }
 
+class BudgetExceededError extends Error {
+  code = 'BUDGET_EXCEEDED'
+}
+
 async function callGenerate(
   ideaId: string,
   prompt: string,
@@ -23,6 +27,7 @@ async function callGenerate(
   })
   if (!res.ok) {
     const body = await res.json().catch(() => ({}))
+    if (body.code === 'BUDGET_EXCEEDED') throw new BudgetExceededError(body.error)
     throw new Error(body.error ?? 'Generation failed')
   }
   return res.json()
@@ -55,13 +60,19 @@ export default function IdeaEditor({
 
       {mutation.isError && (
         <div className="rounded-md border border-red-200 bg-red-50 p-4 flex items-center justify-between">
-          <p className="text-sm text-red-700">생성에 실패했습니다. 다시 시도해주세요.</p>
-          <button
-            onClick={() => mutation.reset()}
-            className="text-sm text-red-600 underline ml-4"
-          >
-            다시 생성
-          </button>
+          <p className="text-sm text-red-700">
+            {mutation.error instanceof BudgetExceededError
+              ? '이번 달 LLM 예산을 초과했습니다. .env.local의 MAX_MONTHLY_USD를 조정하거나 다음 달까지 기다려주세요.'
+              : '생성에 실패했습니다. 다시 시도해주세요.'}
+          </p>
+          {!(mutation.error instanceof BudgetExceededError) && (
+            <button
+              onClick={() => mutation.reset()}
+              className="text-sm text-red-600 underline ml-4 shrink-0"
+            >
+              다시 생성
+            </button>
+          )}
         </div>
       )}
 
