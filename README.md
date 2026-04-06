@@ -4,7 +4,13 @@
 
 **Status**: Epic 1 (Foundation) 진행 중 — 기획 단계 완료, 구현 시작.
 
-**Local dev**: `bun install && bun run dev` (requires `DATABASE_URL` in `.env.local` — see `.env.local.example`)
+## Setup
+
+1. `bun install`
+2. `.env.local.example` → `.env.local` 복사 후 `DATABASE_URL` 입력
+3. Neon SQL Editor에서 `drizzle/custom/slug_immutable.sql` 1회 실행 (트리거 적용)
+4. `bun run dev`
+
 **Deploy**: Push to `main` → Vercel auto-deploy
 **Stack**: Next.js 16 (App Router) + TypeScript + Tailwind v4 + Bun + Neon Postgres + Anthropic Claude
 
