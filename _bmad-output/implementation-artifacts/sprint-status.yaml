@@ -1,0 +1,104 @@
+# generated: 2026-04-06
+# last_updated: 2026-04-06
+# project: blog-practice
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-04-06
+last_updated: 2026-04-06T19:12:00Z
+project: blog-practice
+project_key: NOKEY
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+
+development_status:
+  # Epic 1: Foundation — 프로젝트 세팅 & 가드레일
+  epic-1: in-progress
+  1-1-nextjs-bun-project-setup: review
+  1-2-vercel-neon-deployment-pipeline: ready-for-dev
+  1-3-drizzle-schema-migration: ready-for-dev
+  1-4-slug-immutable-trigger: ready-for-dev
+  1-5-operator-token-middleware-auth: ready-for-dev
+  1-6-llm-base-function-zod-schema: ready-for-dev
+  1-7-kill-switch-logging: ready-for-dev
+  1-8-claude-md-env-readme-gitignore: ready-for-dev
+  1-9-ci-check-legal-sentry: ready-for-dev
+  1-10-debug-json-export-api: ready-for-dev
+  epic-1-retrospective: optional
+
+  # Epic 2: Idea Creation & Workspace
+  epic-2: backlog
+  2-1-draft-create-empty-state: backlog
+  2-2-prompt-editor-component: backlog
+  2-3-llm-call-structured-output-zod: backlog
+  2-4-kill-switch-integration-logging: backlog
+  2-5-generation-progress-cancel: backlog
+  2-6-draft-autosave-failure-path: backlog
+  2-7-edit-three-paths: backlog
+  2-8-smoke-preview-quick-preview-route: backlog
+  2-9-minimal-dashboard: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Publishing & Data Pipeline
+  epic-3: backlog
+  3-1-preview-visitor-view: backlog
+  3-2-publish-api-slug-published-at: backlog
+  3-3-published-page-components: backlog
+  3-4-legal-disclaimer-footer-ci-grep: backlog
+  3-5-event-collector-api-edge: backlog
+  3-6-client-tracking-utility: backlog
+  3-7-pv-cta-event-wiring: backlog
+  3-8-email-form-validation-invalid-counter: backlog
+  3-9-og-meta-responsive-noindex-republish: backlog
+  3-10-lighthouse-ci-bundle-size: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Dashboard & Decision Making
+  epic-4: backlog
+  4-1-metrics-aggregation-dashboard-extension: backlog
+  4-2-metric-sorting: backlog
+  4-3-time-based-status-messages: backlog
+  4-4-min-sample-conversion-suppression: backlog
+  4-5-email-list-view: backlog
+  4-6-llm-cost-monitoring-ui: backlog
+  4-7-empty-state-enhancement: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Lifecycle Management
+  epic-5: backlog
+  5-1-archive-api-confirm-dialog: backlog
+  5-2-archived-section-integration: backlog
+  5-3-archive-restore: backlog
+  5-4-permanent-delete-archived-only: backlog
+  5-5-json-export-operator-ui: backlog
+  epic-5-retrospective: optional
