@@ -49,7 +49,7 @@ development_status:
   1-3-drizzle-schema-migration: review
   1-4-slug-immutable-trigger: done
   1-5-operator-token-middleware-auth: done
-  1-6-llm-base-function-zod-schema: ready-for-dev
+  1-6-llm-base-function-zod-schema: done
   1-7-kill-switch-logging: ready-for-dev
   1-8-claude-md-env-readme-gitignore: ready-for-dev
   1-9-ci-check-legal-sentry: ready-for-dev
