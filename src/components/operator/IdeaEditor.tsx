@@ -145,12 +145,20 @@ export default function IdeaEditor({
               {isInlineEditing ? '편집 완료' : '직접 편집'}
             </button>
             <a
+              href={`/operator/ideas/${ideaId}/preview`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 text-sm border border-blue-300 text-blue-700 rounded-md hover:bg-blue-50 transition-colors"
+            >
+              미리보기 ↗
+            </a>
+            <a
               href={`/operator/ideas/${ideaId}/quick-preview`}
               target="_blank"
               rel="noopener noreferrer"
               className="px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
             >
-              Quick Preview 열기 ↗
+              Quick Preview ↗
             </a>
           </div>
 

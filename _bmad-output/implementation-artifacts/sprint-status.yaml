@@ -57,21 +57,21 @@ development_status:
   epic-1-retrospective: optional
 
   # Epic 2: Idea Creation & Workspace
-  epic-2: in-progress
-  2-1-draft-create-empty-state: review
-  2-2-prompt-editor-component: review
-  2-3-llm-call-structured-output-zod: review
-  2-4-kill-switch-integration-logging: review
-  2-5-generation-progress-cancel: review
-  2-6-draft-autosave-failure-path: review
-  2-7-edit-three-paths: review
-  2-8-smoke-preview-quick-preview-route: review
-  2-9-minimal-dashboard: review
+  epic-2: done
+  2-1-draft-create-empty-state: done
+  2-2-prompt-editor-component: done
+  2-3-llm-call-structured-output-zod: done
+  2-4-kill-switch-integration-logging: done
+  2-5-generation-progress-cancel: done
+  2-6-draft-autosave-failure-path: done
+  2-7-edit-three-paths: done
+  2-8-smoke-preview-quick-preview-route: done
+  2-9-minimal-dashboard: done
   epic-2-retrospective: optional
 
   # Epic 3: Publishing & Data Pipeline
-  epic-3: backlog
-  3-1-preview-visitor-view: backlog
+  epic-3: in-progress
+  3-1-preview-visitor-view: review
   3-2-publish-api-slug-published-at: backlog
   3-3-published-page-components: backlog
   3-4-legal-disclaimer-footer-ci-grep: backlog
