@@ -62,7 +62,7 @@ development_status:
   2-2-prompt-editor-component: review
   2-3-llm-call-structured-output-zod: review
   2-4-kill-switch-integration-logging: review
-  2-5-generation-progress-cancel: backlog
+  2-5-generation-progress-cancel: review
   2-6-draft-autosave-failure-path: backlog
   2-7-edit-three-paths: backlog
   2-8-smoke-preview-quick-preview-route: backlog

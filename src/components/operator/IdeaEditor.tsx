@@ -1,7 +1,9 @@
 'use client'
 
+import { useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import PromptEditor from './PromptEditor'
+import GenerationProgress from './GenerationProgress'
 import type { LandingPageData } from '@/lib/schemas/landing'
 
 interface IdeaEditorProps {
@@ -18,12 +20,14 @@ class BudgetExceededError extends Error {
 async function callGenerate(
   ideaId: string,
   prompt: string,
-  instructions?: string
+  instructions?: string,
+  signal?: AbortSignal
 ): Promise<LandingPageData> {
   const res = await fetch(`/api/ideas/${ideaId}/generate`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ prompt, instructions }),
+    signal,
   })
   if (!res.ok) {
     const body = await res.json().catch(() => ({}))
@@ -39,26 +43,39 @@ export default function IdeaEditor({
   initialInstructions,
   initialPageData,
 }: IdeaEditorProps) {
+  const abortRef = useRef<AbortController | null>(null)
+
   const mutation = useMutation({
-    mutationFn: ({ prompt, instructions }: { prompt: string; instructions?: string }) =>
-      callGenerate(ideaId, prompt, instructions),
+    mutationFn: ({ prompt, instructions }: { prompt: string; instructions?: string }) => {
+      abortRef.current = new AbortController()
+      return callGenerate(ideaId, prompt, instructions, abortRef.current.signal)
+    },
+    onSettled: () => {
+      abortRef.current = null
+    },
   })
 
+  function handleCancel() {
+    abortRef.current?.abort()
+    mutation.reset()
+  }
+
   const pageData = mutation.data ?? initialPageData
+  const isCancelled = mutation.error?.name === 'AbortError'
 
   return (
     <div className="flex flex-col gap-8">
-      <PromptEditor
-        initialPrompt={initialPrompt}
-        initialInstructions={initialInstructions}
-        onGenerate={(prompt, instructions) => mutation.mutate({ prompt, instructions })}
-      />
-
-      {mutation.isPending && (
-        <p className="text-sm text-gray-500 animate-pulse">아이디어를 생성하고 있어요...</p>
+      {!mutation.isPending && (
+        <PromptEditor
+          initialPrompt={initialPrompt}
+          initialInstructions={initialInstructions}
+          onGenerate={(prompt, instructions) => mutation.mutate({ prompt, instructions })}
+        />
       )}
 
-      {mutation.isError && (
+      {mutation.isPending && <GenerationProgress onCancel={handleCancel} />}
+
+      {mutation.isError && !isCancelled && (
         <div className="rounded-md border border-red-200 bg-red-50 p-4 flex items-center justify-between">
           <p className="text-sm text-red-700">
             {mutation.error instanceof BudgetExceededError
