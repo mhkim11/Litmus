@@ -51,7 +51,7 @@ development_status:
   1-5-operator-token-middleware-auth: done
   1-6-llm-base-function-zod-schema: done
   1-7-kill-switch-logging: done
-  1-8-claude-md-env-readme-gitignore: ready-for-dev
+  1-8-claude-md-env-readme-gitignore: done
   1-9-ci-check-legal-sentry: ready-for-dev
   1-10-debug-json-export-api: ready-for-dev
   epic-1-retrospective: optional
