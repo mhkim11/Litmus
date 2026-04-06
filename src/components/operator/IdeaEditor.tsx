@@ -121,7 +121,7 @@ export default function IdeaEditor({
       {viewMode === 'result' && localPageData && !mutation.isPending && (
         <div className="flex flex-col gap-4">
           {/* 3경로 액션 버튼 */}
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap items-center">
             <button
               onClick={() => mutation.mutate({ prompt: lastPrompt, instructions: lastInstructions || undefined })}
               className="px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
@@ -144,6 +144,14 @@ export default function IdeaEditor({
             >
               {isInlineEditing ? '편집 완료' : '직접 편집'}
             </button>
+            <a
+              href={`/operator/ideas/${ideaId}/quick-preview`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+            >
+              Quick Preview 열기 ↗
+            </a>
           </div>
 
           {/* 인라인 편집 또는 결과 표시 */}
