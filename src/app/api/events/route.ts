@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
 import { insertEvent } from '@/lib/db/queries/events'
+import { insertEmailCollection } from '@/lib/db/queries/emailCollections'
 
 export const runtime = 'edge'
 
@@ -9,6 +10,8 @@ const bodySchema = z.object({
   eventType: z.enum(['page_view', 'cta_click', 'email_submit', 'invalid_email']),
   metadata: z.record(z.string(), z.unknown()).optional(),
 })
+
+const emailMetaSchema = z.object({ email: z.string().email() })
 
 export async function POST(request: NextRequest) {
   let body: unknown
@@ -30,7 +33,20 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    await insertEvent(parsed.data)
+    const { ideaId, eventType, metadata } = parsed.data
+
+    if (eventType === 'email_submit') {
+      const emailParsed = emailMetaSchema.safeParse(metadata)
+      if (emailParsed.success) {
+        await insertEmailCollection({ ideaId, email: emailParsed.data.email })
+        await insertEvent({ ideaId, eventType: 'email_submit', metadata })
+      } else {
+        // Malformed email in metadata — record as invalid_email instead
+        await insertEvent({ ideaId, eventType: 'invalid_email', metadata })
+      }
+    } else {
+      await insertEvent({ ideaId, eventType, metadata })
+    }
   } catch (error) {
     console.error('[events] insert error:', error)
     return new Response(JSON.stringify({ error: 'Failed to record event' }), {
