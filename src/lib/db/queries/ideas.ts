@@ -31,6 +31,17 @@ export async function getActiveAndDraftIdeas(): Promise<Idea[]> {
     .orderBy(ideas.updatedAt) // Story 2.9에서 DESC로 확장
 }
 
+export async function updateDraft(
+  id: string,
+  fields: { finalPrompt?: string; finalInstructions?: string }
+): Promise<void> {
+  const db = drizzle(getDb())
+  await db
+    .update(ideas)
+    .set({ ...fields, updatedAt: new Date() })
+    .where(eq(ideas.id, id))
+}
+
 export async function updateIdeaGeneration(
   id: string,
   finalPrompt: string,

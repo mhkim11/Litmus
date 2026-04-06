@@ -67,6 +67,7 @@ export default function IdeaEditor({
     <div className="flex flex-col gap-8">
       {!mutation.isPending && (
         <PromptEditor
+          ideaId={ideaId}
           initialPrompt={initialPrompt}
           initialInstructions={initialInstructions}
           onGenerate={(prompt, instructions) => mutation.mutate({ prompt, instructions })}
