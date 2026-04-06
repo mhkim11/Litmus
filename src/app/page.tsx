@@ -14,13 +14,6 @@ export default function Home() {
         </h1>
 
         <p className="mt-6 text-xl sm:text-2xl font-semibold text-zinc-700 leading-snug">
-          <span className="relative inline-block">
-            Spray and pray
-            <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 bg-red-500 rounded" />
-          </span>
-        </p>
-
-        <p className="mt-3 text-xl sm:text-2xl font-semibold text-zinc-700 leading-snug">
           만들기 전에 팔아보세요.
         </p>
 
@@ -62,7 +55,13 @@ export default function Home() {
           </p>
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="rounded-xl border border-zinc-200 p-6">
-              <p className="text-xs font-semibold text-zinc-400 mb-4">기존 검증</p>
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-xs font-semibold text-zinc-400">기존 검증</p>
+                <span className="relative text-sm font-semibold text-zinc-400">
+                  Spray and pray
+                  <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 bg-red-500 rounded" />
+                </span>
+              </div>
               <ul className="space-y-2 text-sm text-zinc-400">
                 <li className="line-through">Framer 디자인</li>
                 <li className="line-through">Tally 폼 연동</li>
