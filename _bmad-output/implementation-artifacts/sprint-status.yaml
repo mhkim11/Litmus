@@ -75,7 +75,7 @@ development_status:
   3-2-publish-api-slug-published-at: review
   3-3-published-page-components: review
   3-4-legal-disclaimer-footer-ci-grep: review
-  3-5-event-collector-api-edge: backlog
+  3-5-event-collector-api-edge: review
   3-6-client-tracking-utility: backlog
   3-7-pv-cta-event-wiring: backlog
   3-8-email-form-validation-invalid-counter: backlog
