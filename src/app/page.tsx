@@ -9,19 +9,15 @@ export default function Home() {
         <p className="text-sm font-medium tracking-widest text-zinc-400 uppercase mb-6">
           Litmus
         </p>
-        <h1 className="text-4xl sm:text-5xl font-bold leading-tight tracking-tight">
-          아이디어는 싸고,<br />
-          검증은 <span className="line-through text-zinc-300">비싸다.</span>
+        <h1 className="text-4xl sm:text-5xl font-bold leading-tight tracking-tight text-zinc-900">
+          AI로 뚝딱 만들었는데<br />아무도 안 쓰나요?
         </h1>
-        <p className="mt-4 text-4xl sm:text-5xl font-bold leading-tight tracking-tight">
-          Litmus로{' '}
-          <span className="relative inline-block">
-            <span className="relative z-10">검증은 싸다.</span>
-            <span className="absolute inset-x-0 bottom-1 h-3 bg-zinc-900 opacity-10 rounded" />
-          </span>
+
+        <p className="mt-6 text-xl sm:text-2xl font-semibold text-zinc-700 leading-snug">
+          만들기 전에 팔아보세요.
         </p>
 
-        <p className="mt-8 text-lg text-zinc-500 leading-relaxed">
+        <p className="mt-4 text-base text-zinc-400">
           한 줄 아이디어 → AI 랜딩페이지 → 데이터로 판단.
         </p>
 
