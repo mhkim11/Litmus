@@ -84,21 +84,21 @@ development_status:
   epic-3-retrospective: optional
 
   # Epic 4: Dashboard & Decision Making
-  epic-4: backlog
-  4-1-metrics-aggregation-dashboard-extension: backlog
-  4-2-metric-sorting: backlog
-  4-3-time-based-status-messages: backlog
-  4-4-min-sample-conversion-suppression: backlog
-  4-5-email-list-view: backlog
-  4-6-llm-cost-monitoring-ui: backlog
-  4-7-empty-state-enhancement: backlog
+  epic-4: done
+  4-1-metrics-aggregation-dashboard-extension: review
+  4-2-metric-sorting: review
+  4-3-time-based-status-messages: review
+  4-4-min-sample-conversion-suppression: review
+  4-5-email-list-view: review
+  4-6-llm-cost-monitoring-ui: review
+  4-7-empty-state-enhancement: review
   epic-4-retrospective: optional
 
   # Epic 5: Lifecycle Management
-  epic-5: backlog
-  5-1-archive-api-confirm-dialog: backlog
-  5-2-archived-section-integration: backlog
-  5-3-archive-restore: backlog
-  5-4-permanent-delete-archived-only: backlog
-  5-5-json-export-operator-ui: backlog
+  epic-5: done
+  5-1-archive-api-confirm-dialog: review
+  5-2-archived-section-integration: review
+  5-3-archive-restore: review
+  5-4-permanent-delete-archived-only: review
+  5-5-json-export-operator-ui: review
   epic-5-retrospective: optional

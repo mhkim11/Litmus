@@ -20,12 +20,19 @@ export async function GET() {
       db.select().from(llmCallsTable),
     ])
 
-    return NextResponse.json({
-      ideas,
-      events,
-      email_collections: emails,
-      llm_calls: llmCalls,
-      exported_at: new Date().toISOString(),
+    const exportedAt = new Date()
+    const dateStr = exportedAt.toISOString().slice(0, 10)
+    const body = JSON.stringify(
+      { ideas, events, email_collections: emails, llm_calls: llmCalls, exported_at: exportedAt.toISOString() },
+      null,
+      2
+    )
+
+    return new Response(body, {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Disposition': `attachment; filename="litmus-backup-${dateStr}.json"`,
+      },
     })
   } catch (err) {
     console.error('Export failed:', err)

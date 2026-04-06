@@ -1,68 +1,68 @@
-import { getActiveAndDraftIdeas } from '@/lib/db/queries/ideas'
+import Link from 'next/link'
+import { getIdeasWithMetrics, getArchivedIdeas } from '@/lib/db/queries/ideas'
+import { getCurrentMonthLLMCost } from '@/lib/db/queries/llmCalls'
 import EmptyState from '@/components/shared/EmptyState'
 import NewIdeaButton from '@/components/operator/NewIdeaButton'
+import DashboardTable from '@/components/operator/DashboardTable'
+import ArchivedSection from '@/components/operator/ArchivedSection'
+import type { SortBy, SortOrder } from '@/lib/db/queries/ideas'
 
 export const dynamic = 'force-dynamic'
 
-const STATUS_LABEL: Record<string, string> = {
-  draft: '초안',
-  active: '발행됨',
+const VALID_SORT: SortBy[] = ['pv', 'ctaClicks', 'emails', 'updatedAt']
+const VALID_ORDER: SortOrder[] = ['asc', 'desc']
+
+interface Props {
+  searchParams: Promise<{ sortBy?: string; order?: string }>
 }
 
-const STATUS_CLASS: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-600',
-  active: 'bg-green-100 text-green-700',
-}
+export default async function OperatorPage({ searchParams }: Props) {
+  const { sortBy: rawSort, order: rawOrder } = await searchParams
+  const sortBy: SortBy = VALID_SORT.includes(rawSort as SortBy) ? (rawSort as SortBy) : 'updatedAt'
+  const order: SortOrder = VALID_ORDER.includes(rawOrder as SortOrder) ? (rawOrder as SortOrder) : 'desc'
 
-export default async function OperatorPage() {
-  const ideas = await getActiveAndDraftIdeas()
+  const [ideas, archived, llmCost] = await Promise.all([
+    getIdeasWithMetrics(sortBy, order),
+    getArchivedIdeas(),
+    getCurrentMonthLLMCost(),
+  ])
+
+  const maxBudget = Number(process.env.MAX_MONTHLY_USD ?? 50)
+  const costPct = (llmCost / maxBudget) * 100
 
   return (
-    <main className="min-h-screen p-8 max-w-4xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+    <main className="min-h-screen p-8 max-w-6xl mx-auto">
+      <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Operator Console</h1>
-        <NewIdeaButton />
+        <div className="flex items-center gap-3">
+          <Link href="/operator/export" className="text-sm text-gray-500 hover:text-gray-700 hover:underline">
+            데이터 내보내기
+          </Link>
+          <NewIdeaButton />
+        </div>
       </div>
 
-      {ideas.length === 0 ? (
+      {/* LLM 비용 배지 */}
+      <div className={`inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full mb-6 ${
+        costPct >= 100
+          ? 'bg-red-100 text-red-700'
+          : costPct >= 80
+          ? 'bg-amber-100 text-amber-700'
+          : 'bg-gray-100 text-gray-600'
+      }`}>
+        💰 이번 달 LLM 비용: ${llmCost.toFixed(2)} / ${maxBudget.toFixed(2)} ({costPct.toFixed(0)}%)
+        {costPct >= 100 && <span className="font-semibold">— Kill Switch 활성</span>}
+      </div>
+
+      {ideas.length === 0 && archived.length === 0 ? (
         <EmptyState>
           <NewIdeaButton />
         </EmptyState>
       ) : (
-        <div className="overflow-x-auto rounded-lg border border-gray-200">
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b border-gray-200">
-              <tr>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">프롬프트</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600 w-20">상태</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600 w-40">수정 시각</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {ideas.map((idea) => (
-                <tr
-                  key={idea.id}
-                  onClick={() => { window.location.href = `/operator/ideas/${idea.id}` }}
-                  className="hover:bg-gray-50 cursor-pointer transition-colors"
-                >
-                  <td className="px-4 py-3 text-gray-900">
-                    {idea.finalPrompt
-                      ? idea.finalPrompt.slice(0, 50) + (idea.finalPrompt.length > 50 ? '...' : '')
-                      : <span className="text-gray-400 italic">빈 프롬프트</span>}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_CLASS[idea.status] ?? 'bg-gray-100 text-gray-600'}`}>
-                      {STATUS_LABEL[idea.status] ?? idea.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-gray-500 text-xs">
-                    {idea.updatedAt.toLocaleString('ko-KR')}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <>
+          <DashboardTable ideas={ideas} sortBy={sortBy} order={order} />
+          <ArchivedSection ideas={archived} />
+        </>
       )}
     </main>
   )
