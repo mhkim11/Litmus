@@ -1,5 +1,5 @@
 import { drizzle } from 'drizzle-orm/neon-http'
-import { desc, eq, inArray } from 'drizzle-orm'
+import { and, desc, eq, inArray } from 'drizzle-orm'
 import { getDb } from '@/lib/db/client'
 import { ideas } from '@/lib/db/schema'
 import type { Idea } from '@/lib/db/schema'
@@ -67,6 +67,15 @@ export async function updateIdeaGeneration(
 export async function getIdeaById(id: string): Promise<Idea | null> {
   const db = drizzle(getDb())
   const [row] = await db.select().from(ideas).where(eq(ideas.id, id))
+  return row ?? null
+}
+
+export async function getIdeaBySlug(slug: string): Promise<Idea | null> {
+  const db = drizzle(getDb())
+  const [row] = await db
+    .select()
+    .from(ideas)
+    .where(and(eq(ideas.slug, slug), eq(ideas.status, 'active')))
   return row ?? null
 }
 

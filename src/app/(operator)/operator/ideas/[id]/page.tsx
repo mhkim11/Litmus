@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getIdeaById } from '@/lib/db/queries/ideas'
 import IdeaEditor from '@/components/operator/IdeaEditor'
@@ -20,9 +21,9 @@ export default async function IdeaEditPage({ params }: Props) {
   return (
     <main className="min-h-screen p-8 max-w-2xl mx-auto">
       <div className="mb-6">
-        <a href="/operator" className="text-sm text-blue-600 hover:underline">
+        <Link href="/operator" className="text-sm text-blue-600 hover:underline">
           ← Operator Console
-        </a>
+        </Link>
       </div>
       <h1 className="text-2xl font-bold mb-8">아이디어 편집</h1>
       <IdeaEditor

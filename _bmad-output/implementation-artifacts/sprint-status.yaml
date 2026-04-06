@@ -73,7 +73,7 @@ development_status:
   epic-3: in-progress
   3-1-preview-visitor-view: review
   3-2-publish-api-slug-published-at: review
-  3-3-published-page-components: backlog
+  3-3-published-page-components: review
   3-4-legal-disclaimer-footer-ci-grep: backlog
   3-5-event-collector-api-edge: backlog
   3-6-client-tracking-utility: backlog
