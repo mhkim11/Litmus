@@ -13,12 +13,14 @@ export default function Home() {
           AI로 뚝딱 만들었는데<br />아무도 안 쓰나요?
         </h1>
 
-        <div className="mt-6 inline-flex items-center gap-3">
-          <span className="text-2xl font-black text-red-500">✕</span>
-          <span className="text-xl font-semibold text-zinc-300 line-through">Spray and pray</span>
-        </div>
+        <p className="mt-6 text-xl sm:text-2xl font-semibold text-zinc-700 leading-snug">
+          <span className="relative inline-block">
+            Spray and pray
+            <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 bg-red-500 rounded" />
+          </span>
+        </p>
 
-        <p className="mt-5 text-xl sm:text-2xl font-semibold text-zinc-700 leading-snug">
+        <p className="mt-3 text-xl sm:text-2xl font-semibold text-zinc-700 leading-snug">
           만들기 전에 팔아보세요.
         </p>
 
