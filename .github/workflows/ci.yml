@@ -30,3 +30,13 @@ jobs:
 
       - name: Check legal disclaimer
         run: bun run check:legal
+
+      - name: Build
+        run: bun run build
+
+      - name: Check bundle size
+        run: bun run check:bundle
+
+      - name: Lighthouse CI
+        run: bunx lhci autorun
+        continue-on-error: true

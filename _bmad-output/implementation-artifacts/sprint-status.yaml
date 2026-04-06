@@ -70,7 +70,7 @@ development_status:
   epic-2-retrospective: optional
 
   # Epic 3: Publishing & Data Pipeline
-  epic-3: in-progress
+  epic-3: done
   3-1-preview-visitor-view: review
   3-2-publish-api-slug-published-at: review
   3-3-published-page-components: review
@@ -80,7 +80,7 @@ development_status:
   3-7-pv-cta-event-wiring: review
   3-8-email-form-validation-invalid-counter: review
   3-9-og-meta-responsive-noindex-republish: review
-  3-10-lighthouse-ci-bundle-size: backlog
+  3-10-lighthouse-ci-bundle-size: review
   epic-3-retrospective: optional
 
   # Epic 4: Dashboard & Decision Making
