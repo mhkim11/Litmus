@@ -79,7 +79,7 @@ development_status:
   3-6-client-tracking-utility: review
   3-7-pv-cta-event-wiring: review
   3-8-email-form-validation-invalid-counter: review
-  3-9-og-meta-responsive-noindex-republish: backlog
+  3-9-og-meta-responsive-noindex-republish: review
   3-10-lighthouse-ci-bundle-size: backlog
   epic-3-retrospective: optional
 

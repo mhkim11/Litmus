@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getIdeaBySlug } from '@/lib/db/queries/ideas'
 import HeroSection from '@/components/published/HeroSection'
@@ -10,6 +11,29 @@ export const dynamic = 'force-dynamic'
 
 interface Props {
   params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const idea = await getIdeaBySlug(slug)
+  if (!idea) return {}
+
+  const pageData = idea.finalPageData as LandingPageData
+  const title = pageData.hero.title
+  const description = pageData.hero.subtitle
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+    },
+    robots: idea.noindex
+      ? { index: false, follow: false }
+      : { index: true, follow: true },
+  }
 }
 
 export default async function PublishedPage({ params }: Props) {
