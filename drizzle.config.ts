@@ -1,10 +1,10 @@
 import type { Config } from 'drizzle-kit'
+import fs from 'node:fs'
+import path from 'node:path'
 
 if (!process.env.DATABASE_URL) {
   // Load .env.local manually since drizzle-kit doesn't auto-load Next.js env files
   // This only matters when running drizzle-kit commands from CLI.
-  const fs = require('node:fs')
-  const path = require('node:path')
   const envPath = path.resolve(process.cwd(), '.env.local')
   if (fs.existsSync(envPath)) {
     const envContent = fs.readFileSync(envPath, 'utf-8') as string
