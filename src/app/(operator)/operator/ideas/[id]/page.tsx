@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getIdeaById } from '@/lib/db/queries/ideas'
-import PromptEditor from '@/components/operator/PromptEditor'
+import IdeaEditor from '@/components/operator/IdeaEditor'
+import type { LandingPageData } from '@/lib/schemas/landing'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,10 +25,11 @@ export default async function IdeaEditPage({ params }: Props) {
         </a>
       </div>
       <h1 className="text-2xl font-bold mb-8">아이디어 편집</h1>
-      <PromptEditor
+      <IdeaEditor
         ideaId={idea.id}
         initialPrompt={idea.finalPrompt ?? ''}
         initialInstructions={idea.finalInstructions ?? ''}
+        initialPageData={(idea.finalPageData as LandingPageData) ?? null}
       />
     </main>
   )

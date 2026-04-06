@@ -3,14 +3,12 @@
 import { useState } from 'react'
 
 interface PromptEditorProps {
-  ideaId: string
   initialPrompt?: string
   initialInstructions?: string
   onGenerate?: (prompt: string, instructions?: string) => void
 }
 
 export default function PromptEditor({
-  ideaId: _ideaId,
   initialPrompt = '',
   initialInstructions = '',
   onGenerate,

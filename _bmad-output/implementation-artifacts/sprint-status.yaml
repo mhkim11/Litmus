@@ -60,7 +60,7 @@ development_status:
   epic-2: in-progress
   2-1-draft-create-empty-state: review
   2-2-prompt-editor-component: review
-  2-3-llm-call-structured-output-zod: backlog
+  2-3-llm-call-structured-output-zod: review
   2-4-kill-switch-integration-logging: backlog
   2-5-generation-progress-cancel: backlog
   2-6-draft-autosave-failure-path: backlog
