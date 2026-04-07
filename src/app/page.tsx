@@ -10,7 +10,7 @@ export default function Home() {
           Litmus
         </p>
         <h1 className="text-4xl sm:text-5xl font-bold leading-tight tracking-tight text-zinc-900">
-          AI로 뚝딱 만들었는데<br />아무도 안 쓰나요?
+          AI로 딸깍 만들었는데<br />아무도 안 쓰나요?
         </h1>
 
         <p className="mt-6 text-xl sm:text-2xl font-semibold text-zinc-700 leading-snug">
@@ -57,10 +57,6 @@ export default function Home() {
             <div className="rounded-xl border border-zinc-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-xs font-semibold text-zinc-400">기존 검증</p>
-                <span className="relative text-sm font-semibold text-zinc-400">
-                  Spray and pray
-                  <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 bg-red-500 rounded" />
-                </span>
               </div>
               <ul className="space-y-2 text-sm text-zinc-400">
                 <li className="line-through">Framer 디자인</li>
