@@ -7,7 +7,7 @@
 CREATE OR REPLACE FUNCTION prevent_slug_update()
 RETURNS TRIGGER AS $$
 BEGIN
-  IF OLD.slug IS DISTINCT FROM NEW.slug THEN
+  IF OLD.slug IS NOT NULL AND OLD.slug IS DISTINCT FROM NEW.slug THEN
     RAISE EXCEPTION 'slug is immutable (attempted: % → %)', OLD.slug, NEW.slug;
   END IF;
   RETURN NEW;
